@@ -16,7 +16,7 @@ END_REC_TIME = {"H":9, "M":00, "S":0, "ms":0}
 VIDEO_DIR = "video"
 
 
-st.title("Camera Application")
+st.title('RemoteCam App')
 datetime_loc = st.empty()
 # カメラデバイス設定
 device = user_input = st.text_input("input your video/camera device", "0")
