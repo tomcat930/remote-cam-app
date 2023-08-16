@@ -18,16 +18,17 @@ VIDEO_DIR = "video"
 
 st.title('Remote cam app')
 datetime_loc = st.empty()
+
 # カメラデバイス設定
 device = user_input = st.text_input("input your video/camera device", "0")
 if device.isnumeric():
     device = int(device)
+    
 image_loc = st.empty()
 
 d_today = datetime.now()
 strtime = d_today.strftime('%Y%m%d_%H:%M:%S')
 strday = d_today.strftime('%Y%m%d')
-
 save_path = "./{}/{}".format(VIDEO_DIR, strday)
 if not os.path.exists(save_path):
     os.makedirs(save_path)
@@ -38,7 +39,8 @@ fps = int(cap.get(cv2.CAP_PROP_FPS))                        # カメラのFPSを
 w = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))                  # カメラの横幅を取得
 h = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))                 # カメラの縦幅を取得
 fourcc = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')         # 動画保存時のfourcc設定（mp4用）
-video = cv2.VideoWriter('{}/{}.mp4'.format(save_path, strtime), fourcc, fps, (w, h))  # 動画の仕様（ファイル名、fourcc, FPS, サイズ）
+video = cv2.VideoWriter(
+    '{}/{}.mp4'.format(save_path, strtime), fourcc, fps, (w, h))  # 動画の仕様（ファイル名、fourcc, FPS, サイズ）
 
 def main():
     while cap.isOpened:
@@ -87,7 +89,6 @@ def main():
             img = Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
             image_loc.image(img)
 
-        time.sleep(0.01)
         if cv2.waitKey(1) & 0xFF == ord("q"):
             break
 
